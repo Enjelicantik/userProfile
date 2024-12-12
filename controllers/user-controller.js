@@ -24,4 +24,16 @@ const getUserById = async (req, res) => {
     }
 };
 
-module.exports = { getAllUsers, getUserById };
+const addUser = async (req, res) => {
+    try {
+        const newUserId = await userModel.addUser(req.body)
+        res.status(200).json({id:newUserId,...req.body})
+
+    } catch (error){
+        res.status(500).json({message: 'Error Insert Data', error})
+        console.log(error);
+        
+    }
+}
+
+module.exports = { getAllUsers, getUserById, addUser};
